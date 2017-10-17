@@ -29,7 +29,7 @@ cf events APPNAME
 
 Running ``cf events`` shows you when an app starts, stops, restarts, or crashes (including error codes). The output is often easier to interpret than the output of ``cf logs``.
 
-### Third-Party Log Management Services
+## Using Third-Party Log Management Services
 
 The default Cloud Foundry logging system stores a limited amount of logging information for a defined time. You can retain  logging information for a longer period of time by setting up a third-party log management service. Instructions on how to set up a log management service can be found [here](https://docs.cloudfoundry.org/devguide/services/log-management.html) [external link]. The next section details how to set up an example log management service, [Logit.io](https://logit.io/) [external link].
 
@@ -120,14 +120,14 @@ filter {
 ##### Configure application
 
 1. Click the _Settings_ button for the stack you want to use.
-2. Click _Logstash Inputs_ on the Stack options menu. 
+2. Click _Logstash Inputs_ on the Stack options menu.
 3. Note your _Stack Logstash_ endpoint and TCP-SSL port.
 4. Create the log drain service in Cloud Foundry:
   ```
   $ cf create-user-provided-service logit-ssl-drain -l syslog-tls://ENDPOINT:PORT
   ```
 5. Bind the service to your app:
-  
+
   ```
   $ cf bind-service YOUR-CF-APP-NAME logit-ssl-drain
   ```
@@ -141,7 +141,7 @@ Once you have verified that the logs are draining correctly, you have successful
 
 ##### Security
 
-The default Logit configuration allows anyone on the Internet to send log messages to your ELK stack. 
+The default Logit configuration allows anyone on the Internet to send log messages to your ELK stack.
 
 If you want to ensure that only log messages from GOV.UK PaaS can be sent to your ELK stack:
 1. Contact GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for a list of syslog drain egress IP addresses.
@@ -156,5 +156,3 @@ For more information about logging and troubleshooting app deployment, see the f
 * [Viewing your application's logs](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html#view) [external link]
 * [Troubleshooting application deployment and health](https://docs.cloudfoundry.org/devguide/deploy-apps/troubleshoot-app-health.html) [external link]
 * [Configuring third-party log management services](https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html) [external link]
-
-
